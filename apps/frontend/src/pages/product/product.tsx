@@ -1,9 +1,9 @@
 import Head from 'next/head'
-import styles from '../styles/CreateNewProduct.module.scss'
-import { Header } from '../components/comuns/Header'
-import { Button } from '../components/ui/Button'
-import { Input } from '../components/ui/Input'
-export default function createNewProduct() {
+import styles from './product.module.scss'
+import { Header } from '../../components/comuns/Header'
+import { Button } from '../../components/ui/Button'
+import { Input } from '../../components/ui/Input'
+export default function Product() {
   return (
     <>
       <Head>

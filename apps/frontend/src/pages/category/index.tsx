@@ -1,11 +1,11 @@
-import { Input } from '../components/ui/Input'
-import { Button } from '../components/ui/Button'
+import { Input } from '../../components/ui/Input'
+import { Button } from '../../components/ui/Button'
 
 import Head from 'next/head'
 
-import styles from '../styles/RegisterCategory.module.scss'
-import { Header } from '../components/comuns/Header'
-export default function Register() {
+import styles from './category.module.scss'
+import { Header } from '../../components/comuns/Header'
+export default function Category() {
   return (
     <>
       <Head>

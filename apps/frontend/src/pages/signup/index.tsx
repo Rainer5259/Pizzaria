@@ -1,12 +1,12 @@
-import { Input } from '../components/ui/Input'
-import { Button } from '../components/ui/Button'
+import { Input } from '../../components/ui/Input'
+import { Button } from '../../components/ui/Button'
 
 import Head from 'next/head'
 import Image from 'next/image'
-import logo from '../../public/images/svg/logo.svg'
-import styles from '../styles/Register.module.scss'
+import logo from '../../../public/images/svg/logo.svg'
+import styles from './signup.module.scss'
 
-export default function Register() {
+export default function SignUp() {
   return (
     <>
       <Head>
