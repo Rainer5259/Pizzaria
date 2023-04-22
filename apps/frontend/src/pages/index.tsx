@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Input } from '../components/ui/Input'
 import { Button } from '../components/ui/Button'
 import { AuthContext } from '../contexts/AuthContext'
-import { FormEvent, useContext, useEffect, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import Link from 'next/link'
 
 export default function Home() {
@@ -14,12 +14,19 @@ export default function Home() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   async function handleLogin(event: FormEvent) {
+    setLoading(true)
     event.preventDefault()
     let data = {
       email,
       password
     }
+    if (email === '' || password === '') {
+      return alert('Informe as credenciais')
+    }
+
     await signIn(data)
+
+    setLoading(false)
   }
   return (
     <>
@@ -45,7 +52,7 @@ export default function Home() {
               onChange={e => setPassword(e.target.value)}
             />
 
-            <Button type="submit" className={styles.button} loading={false}>
+            <Button type="submit" className={styles.button} loading={loading}>
               Acessar
             </Button>
           </form>
