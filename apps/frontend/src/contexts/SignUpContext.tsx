@@ -1,5 +1,7 @@
 import { ReactNode, createContext } from 'react'
 import { api } from '../services/apiClient'
+import { toast } from 'react-toastify'
+import Router from 'next/router'
 
 type SignUpContextData = {
   signUp: (credentials: SignUpProps) => Promise<void>
@@ -12,6 +14,7 @@ type SignUpProps = {
 type SignUpProviderProps = {
   children: ReactNode
 }
+
 export const SignUpContext = createContext({} as SignUpContextData)
 
 export function SignUpProvider({ children }: SignUpProviderProps) {
@@ -22,10 +25,10 @@ export function SignUpProvider({ children }: SignUpProviderProps) {
         password,
         name
       })
-      console.log('Chamou response', response)
-      // Router.push('/')
-    } catch (e) {
-      console.log('Erro ao cadastrar', e)
+
+      Router.push('/')
+    } catch (err: any) {
+      toast.error(err.response?.data?.error || 'An error occurred')
     }
   }
   return (

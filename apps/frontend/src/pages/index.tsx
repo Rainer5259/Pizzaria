@@ -7,6 +7,7 @@ import { Button } from '../components/ui/Button'
 import { AuthContext } from '../contexts/AuthContext'
 import { FormEvent, useContext, useState } from 'react'
 import Link from 'next/link'
+import { toast } from 'react-toastify'
 
 export default function Home() {
   const { signIn } = useContext(AuthContext)
@@ -14,15 +15,15 @@ export default function Home() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   async function handleLogin(event: FormEvent) {
-    setLoading(true)
     event.preventDefault()
     let data = {
       email,
       password
     }
     if (email === '' || password === '') {
-      return alert('Informe as credenciais')
+      return toast.error('Informe as credenciais')
     }
+    setLoading(true)
 
     await signIn(data)
 

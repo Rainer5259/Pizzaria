@@ -6,7 +6,7 @@ import { Input } from '../../components/ui/Input'
 import { SignUpContext } from '../../contexts/SignUpContext'
 import logo from '../../../public/images/svg/logo.svg'
 import styles from './signup.module.scss'
-
+import { toast } from 'react-toastify'
 export default function SignUp() {
   const { signUp } = useContext(SignUpContext)
   const [email, setEmail] = useState('')
@@ -18,7 +18,7 @@ export default function SignUp() {
     event.preventDefault()
 
     if (name === '' || email === '' || password === '') {
-      alert('Preencha todos os campos')
+      toast.error('Preencha todos os campos !')
       return
     }
 
@@ -29,10 +29,11 @@ export default function SignUp() {
       password,
       name
     }
+
     await signUp(data)
+
     setLoading(false)
   }
-
   return (
     <>
       <Head>
@@ -67,6 +68,7 @@ export default function SignUp() {
               Cadastrar
             </Button>
           </form>
+
           <a className={styles.text} href="http://localhost:3000/?">
             Já possuo uma conta
           </a>

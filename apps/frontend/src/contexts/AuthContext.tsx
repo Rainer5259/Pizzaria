@@ -2,6 +2,7 @@ import Router from 'next/router'
 import { destroyCookie, parseCookies, setCookie } from 'nookies'
 import { createContext, ReactNode, useState } from 'react'
 import { api } from '../services/apiClient'
+import { toast } from 'react-toastify'
 
 type AuthContextData = {
   user?: UserProps
@@ -49,11 +50,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       //Pass to nexts requests the token
       api.defaults.headers['Authorization'] = `Bearer ${token}`
-    } catch (err) {
-      console.log('Erro ao acessar', err)
-    }
 
-    Router.push('/dashboard')
+      // Router.push('/dashboard')
+    } catch (e) {
+      toast.error('Erro ao acessar')
+    }
   }
 
   return (
