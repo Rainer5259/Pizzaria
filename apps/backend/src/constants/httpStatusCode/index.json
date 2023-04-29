@@ -1,0 +1,94 @@
+{
+  "AUTH": {
+    "UNAUTHENTICATED": {
+      "CODE": 401,
+      "MESSAGE": "Unauthenticated"
+    },
+    "INVALID_CREDENTIALS": {
+      "CODE": 401,
+      "MESSAGE": "Invalid credentials"
+    },
+    "INVALID_TOKEN": {
+      "CODE": 401,
+      "MESSAGE": "Invalid Token"
+    },
+    "SUCCESS": {
+      "CODE": 200,
+      "MESSAGE": "OK"
+    }
+  },
+  "USER_INPUT": {
+    "MISSING_REQUIRED_FIELDS": {
+      "CODE": 400,
+      "MESSAGE": "Missing required fields"
+    },
+    "INVALID_FIELD_VALUE": {
+      "CODE": 400,
+      "MESSAGE": "Invalid field value"
+    },
+    "INVALID_EMAIL": {
+      "CODE": 400,
+      "MESSAGE": "Invalid email"
+    }
+  },
+  "ERROR": {
+    "METHOD_NOT_ALLOWED": {
+      "CODE": 405,
+      "MESSAGE": "Method Not Allowed"
+    },
+    "CONFLICT": {
+      "CODE": 409,
+      "MESSAGE": "Conflict"
+    },
+    "USER_ALREADY_EXISTS": {
+      "CODE": 409,
+      "MESSAGE": "User already exists"
+    },
+    "UNPROCESSABLE_ENTITY": {
+      "CODE": 422,
+      "MESSAGE": "Unprocessable Entity"
+    },
+    "UNAUTHORIZED": {
+      "CODE": 401,
+      "MESSAGE": "Unauthorized"
+    },
+    "NOT_FOUND": {
+      "CODE": 404,
+      "MESSAGE": "Not Found"
+    },
+    "FORBIDDEN": {
+      "CODE": 403,
+      "MESSAGE": "Forbidden"
+    },
+    "INTERNAL_SERVER_ERROR": {
+      "CODE": 500,
+      "MESSAGE": "Internal Server Error"
+    },
+    "BAD_GATEWAY": {
+      "CODE": 502,
+      "MESSAGE": "Bad Gateway"
+    },
+    "SERVICE_UNAVAILABLE": {
+      "CODE": 503,
+      "MESSAGE": "Service Unavailable"
+    },
+    "GATEWAY_TIMEOUT": {
+      "CODE": 504,
+      "MESSAGE": "Gateway Timeout"
+    }
+  },
+  "SUCCESS": {
+    "CREATED": {
+      "CODE": 201,
+      "MESSAGE": "Created"
+    },
+    "UPDATED": {
+      "CODE": 200,
+      "MESSAGE": "OK"
+    },
+    "DELETED": {
+      "CODE": 204,
+      "MESSAGE": "No Content"
+    }
+  }
+}
