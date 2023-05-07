@@ -8,6 +8,7 @@ import { AuthContext } from '../contexts/AuthContext'
 import { FormEvent, useContext, useState } from 'react'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
+import { canSSRguess } from '../utils/canSSR/guess'
 
 export default function Home() {
   const { signIn } = useContext(AuthContext)
@@ -65,3 +66,8 @@ export default function Home() {
     </>
   )
 }
+export const getServerSideProps = canSSRguess(async ctx => {
+  return {
+    props: {}
+  }
+})

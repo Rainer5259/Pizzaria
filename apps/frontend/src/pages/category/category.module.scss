@@ -19,6 +19,15 @@
   justify-content: center;
   align-items: center;
 }
+.selectProduct{
+  margin-bottom: 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background-color: var(--red-900);
+  color: var(--white);
+  padding: 0.8rem;
+  border: 1px solid var(--gray-100)
+}
 .login{
   margin-top: 2rem;
   width: 900px;

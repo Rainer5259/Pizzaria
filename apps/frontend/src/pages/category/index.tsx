@@ -5,7 +5,22 @@ import Head from 'next/head'
 
 import styles from './category.module.scss'
 import { Header } from '../../components/comuns/Header'
+import { canSSRAuth } from '@//utils/canSSR/auth'
+import { api } from '@//services/apiClient'
+import { FormEvent, useState } from 'react'
+import { toast } from 'react-toastify'
 export default function Category() {
+  const [name, setName] = useState('')
+  async function createCategory(event: FormEvent) {
+    event.preventDefault()
+
+    try {
+      await api.post('/category', { name })
+      toast.success('Categoria cadastrada')
+    } catch (e: any) {
+      toast.error(e.response?.data?.error || 'An error occurred')
+    }
+  }
   return (
     <>
       <Head>
@@ -15,14 +30,21 @@ export default function Category() {
       <Header />
       <div className={styles.container}>
         <div className={styles.login}>
-          <form>
+          <form onSubmit={createCategory}>
             <h1>Nova categoria</h1>
             <Input
               type="text"
               className={styles.input}
               placeholder="Nome da Categoria"
+              onChange={e => setName(e.target.value)}
+              value={name}
             />
-            <Button type="submit" className={styles.button} loading={false}>
+            <Button
+              type="submit"
+              className={styles.button}
+              loading={false}
+              onClick={() => console.log('Clicou')}
+            >
               Cadastrar
             </Button>
           </form>
@@ -31,3 +53,7 @@ export default function Category() {
     </>
   )
 }
+
+export const getServerSideProps = canSSRAuth(async ctx => {
+  return { props: {} }
+})

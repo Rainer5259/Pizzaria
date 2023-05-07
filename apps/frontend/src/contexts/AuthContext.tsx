@@ -1,6 +1,6 @@
 import Router from 'next/router'
 import { destroyCookie, parseCookies, setCookie } from 'nookies'
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useState, useEffect } from 'react'
 import { api } from '../services/apiClient'
 import { toast } from 'react-toastify'
 
@@ -37,6 +37,29 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>()
   const isAuthenticated = !!user
 
+  const [token, setToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    //try find the token on cookie
+    const { '@nextauth.token': token } = parseCookies()
+    setToken(token)
+  }, [])
+
+  useEffect(() => {
+    if (token) {
+      api
+        .get('/me')
+        .then(async response => {
+          const { id, name, email } = await response.data
+          setUser({ id, name, email })
+        })
+        .catch(e => {
+          signOut()
+          toast.error('Faça o login novamente')
+        })
+    }
+  }, [token])
+
   async function signIn({ email, password }: SignInProps) {
     try {
       const response = await api.post('/session', { email, password })
@@ -51,7 +74,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       //Pass to nexts requests the token
       api.defaults.headers['Authorization'] = `Bearer ${token}`
 
-      // Router.push('/dashboard')
+      Router.push('/category')
     } catch (e) {
       toast.error('Erro ao acessar')
     }
