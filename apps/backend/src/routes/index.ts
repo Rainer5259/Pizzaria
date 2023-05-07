@@ -42,11 +42,7 @@ router.post(
   new CreateProductController().handle
 )
 
-router.get(
-  '/category/product',
-  isAuthenticated,
-  new ListByCategoryController().handle
-)
+router.get('/product', isAuthenticated, new ListByCategoryController().handle)
 
 // -- ROUTES / ORDERS -- //
 

@@ -1,0 +1,79 @@
+{
+  "DUPLICATE_PIZZA": {
+    "CODE": 409,
+    "MESSAGE": "Esse sabor de pizza já existe"
+  },
+  "MISSING_TOPPING": {
+    "CODE": 400,
+    "MESSAGE": "Por favor, adicione pelo menos um ingrediente à pizza"
+  },
+  "INVALID_TOPPING": {
+    "CODE": 400,
+    "MESSAGE": "Esse ingrediente não está disponível em nosso cardápio"
+  },
+  "MISSING_PIZZA_NAME": {
+    "CODE": 400,
+    "MESSAGE": "Por favor, insira um nome para a pizza"
+  },
+  "MISSING_ORDER_DETAILS": {
+    "CODE": 400,
+    "MESSAGE": "Houve um erro ao tentar obter detalhes do pedido"
+  },
+  "INVALID_ORDER_ID": {
+    "CODE": 401,
+    "MESSAGE": "Este pedido não existe"
+  },
+  "MISSING_CATEGORY": {
+    "CODE": 400,
+    "MESSAGE": "Categoria não existe"
+  },
+  "INVALID_ITEM": {
+    "CODE": 422,
+    "MESSAGE": "Erro ao adicionar item"
+  },
+  "INVALID_CATEGORY": {
+    "CODE": 422,
+    "MESSAGE": "A categoria selecionada é inválida"
+  },
+  "INVALID_CATEGORY_ID": {
+    "CODE": 422,
+    "MESSAGE": "O ID não é inválido"
+  },
+  "INVALID_CATEGORY_NAME": {
+    "CODE": 422,
+    "MESSAGE": "O nome da categoria é inválida"
+  },
+  "INVALID_CATEGORY_ALREADY_EXIST": {
+    "CODE": 422,
+    "MESSAGE": "Essa Categoria já existe"
+  },
+  "INVALID_PRICE": {
+    "CODE": 422,
+    "MESSAGE": "O preço inserido é inválido"
+  },
+  "INVALID_ORDER_STATUS": {
+    "CODE": 422,
+    "MESSAGE": "O status do pedido é inválido"
+  },
+
+  "MISSING_CUSTOMER_INFO": {
+    "CODE": 400,
+    "MESSAGE": "Por favor, preencha as informações do cliente"
+  },
+  "MISSING_DELIVERY_ADDRESS": {
+    "CODE": 400,
+    "MESSAGE": "Por favor, insira o endereço de entrega"
+  },
+  "INVALID_PAYMENT_METHOD": {
+    "CODE": 422,
+    "MESSAGE": "O método de pagamento selecionado é inválido"
+  },
+  "ORDER_NOT_FOUND": {
+    "CODE": 404,
+    "MESSAGE": "Pedido não encontrado"
+  },
+  "INVALID_CREDENTIALS": {
+    "CODE": 401,
+    "MESSAGE": "Credenciais inválidas"
+  }
+}

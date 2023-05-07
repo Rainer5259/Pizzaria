@@ -1,0 +1,38 @@
+{
+  "CATEGORIES": ["PIZZAS", "BEBIDAS", "SOBREMESAS", "ACOMPANHAMENTOS"],
+
+  "PIZZAS": [
+    "MUSSARELA",
+    "CALABRESA",
+    "MARGHERITA",
+    "PORTUGUESA",
+    "QUATRO QUEIJOS",
+    "FRANGO COM CATUPIRY",
+    "LIGEIRA",
+    "VEGETARIANA",
+    "BAIANA",
+    "AMERICANA",
+    "NAPOLITANA",
+    "PALMITO",
+    "ROME"
+  ],
+
+  "BEBIDAS": [
+    "REFRIGERANTE",
+    "SUCO NATURAL",
+    "CERVEJA",
+    "VINHO",
+    "ÁGUA MINERAL",
+    "DRINKS ALCOÓLICOS"
+  ],
+
+  "SOBREMESAS": ["PUDIM", "SORVETE", "TORTA", "PAVÊ", "MIL-FOLHAS"],
+
+  "ACOMPANHAMENTOS": [
+    "BATATA FRITA",
+    "POLENTA FRITA",
+    "ONION RINGS",
+    "SALADA",
+    "PÃO DE ALHO"
+  ]
+}

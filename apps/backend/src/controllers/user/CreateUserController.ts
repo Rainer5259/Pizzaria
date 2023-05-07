@@ -6,10 +6,10 @@ class CreateUserController {
   async handle(req: Request, res: Response) {
     const { name, email, password } = req.body
 
-    const createUserService = new CreateUserService()
-    const validateEmailFormat = new RegExp(/\w{4,8}\d?\S+@\S+\.\S+/).test(email)
     try {
-      if (!validateEmailFormat) {
+      const createUserService = new CreateUserService()
+      const validateEmailFormat = /\S+@\S+\.\S+/
+      if (!validateEmailFormat.test(email)) {
         throw new Error(USER_INPUT.INVALID_EMAIL.MESSAGE)
       }
       const user = await createUserService.execute({ name, email, password })

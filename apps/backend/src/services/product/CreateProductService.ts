@@ -1,5 +1,5 @@
 import prismaClient from '../../prisma'
-
+import * as ERROR from '../../constants/internalMessages/index.json'
 interface ProductRequest {
   name: string
   price: string
@@ -16,16 +16,23 @@ class CreateProductService {
     banner,
     category_id
   }: ProductRequest) {
-    const product = await prismaClient.product.create({
-      data: {
-        name: name,
-        price: price,
-        description: description,
-        banner: banner,
-        category_id: category_id
+    try {
+      if (!category_id) {
+        throw new Error(ERROR.INVALID_CATEGORY_ID.MESSAGE)
       }
-    })
-    return product
+      const product = await prismaClient.product.create({
+        data: {
+          name: name,
+          price: price,
+          description: description,
+          banner: banner,
+          category_id: category_id
+        }
+      })
+      return product
+    } catch (e) {
+      throw new Error(e.message || 'An error has occurred')
+    }
   }
 }
 
