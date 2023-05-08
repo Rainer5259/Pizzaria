@@ -27,6 +27,7 @@ export function ModalOrder({
       transform: 'translate(-50%, -50%)'
     }
   }
+
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
       <button
@@ -54,7 +55,7 @@ export function ModalOrder({
         ))}
         <button
           className={styles.buttonOrder}
-          onClick={() => handleFinishOrder(order[0].id)}
+          onClick={() => handleFinishOrder(order[0].order_id)}
         >
           Concluir Pedido
         </button>
