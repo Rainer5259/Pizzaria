@@ -52,33 +52,31 @@ export default function Dashboard({ orders }: HomeProps) {
   }
 
   async function handleOpenModalView(id: string) {
-    console.log(id)
-    try {
-      const apiClient = setupAPIClient()
+    const apiClient = setupAPIClient()
+    const response = await apiClient.get('/order/detail', {
+      params: {
+        order_id: id
+      }
+    })
 
-      const response = await apiClient.get('/order/detail', {
-        params: {
-          order_id: id
-        }
-      })
-
-      setModalItem(response.data)
-      setModalVisible(true)
-    } catch (e: any) {
-      toast.error(e.response?.data?.error)
-    }
+    setModalItem(response.data)
+    setModalVisible(true)
   }
 
   async function handleFinishItem(id: string) {
-    const apiClient = setupAPIClient()
-    await apiClient.put('/order/finish', {
-      order_id: id
-    })
+    try {
+      const apiClient = setupAPIClient()
+      await apiClient.put('/order/complete', {
+        order_id: id
+      })
 
-    const response = await apiClient.get('/orders')
+      const response = await apiClient.get('/orders')
 
-    setOrderList(response.data)
-    setModalVisible(false)
+      setOrderList(response.data)
+      setModalVisible(false)
+    } catch (e: any) {
+      toast.error(e.response?.data?.error)
+    }
   }
 
   async function handleRefreshOrders() {
@@ -89,6 +87,7 @@ export default function Dashboard({ orders }: HomeProps) {
   }
 
   Modal.setAppElement('#__next')
+
   return (
     <>
       <Head>
@@ -137,13 +136,18 @@ export default function Dashboard({ orders }: HomeProps) {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx: any) => {
-  const apiClient = setupAPIClient(ctx)
+  try {
+    const apiClient = setupAPIClient(ctx)
 
-  const response = await apiClient.get('/orders')
+    const response = await apiClient.get('/orders')
+    //console.log(response.data);
 
-  return {
-    props: {
-      orders: response.data
+    return {
+      props: {
+        orders: response.data
+      }
     }
+  } catch (e) {
+    throw new Error('An error has ocurred')
   }
 })
