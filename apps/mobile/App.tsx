@@ -3,7 +3,7 @@ import { SafeAreaView, View } from 'react-native'
 import Routes from './src/routes'
 import store from './src/redux/store'
 import Toast from 'react-native-toast-message'
-import { colors } from './src/components/theme/fontStyles.1'
+import { colors } from './src/components/theme'
 import { useEffect } from 'react'
 import * as SplashScreen from 'expo-splash-screen'
 export default function App() {
