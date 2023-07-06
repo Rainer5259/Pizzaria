@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native'
-import {  fontStyles } from '../../theme'
+import { fontStyles } from '../../theme'
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#334',
     alignSelf: 'center',
     justifyContent: 'center',
-    alignItems : 'center',
+    alignItems: 'center',
     marginTop: 150,
     height: 420,
     width: 300,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     top: 20,
     padding: 6,
     ...fontStyles.body,
-    alignSelf: 'flex-start',
+    alignSelf: 'flex-start'
   }
 })
 export default styles
