@@ -23,7 +23,7 @@ import { Order } from '../../types'
 
 type OpenTableScreenNavigationProp = NavigationProp<
   RootStackParamList,
-  'CustomizingOrder'
+  'OrderCustomizing'
 >
 
 type Props = {
@@ -77,7 +77,7 @@ const CreateOrder: React.FC<Props> = ({ navigation }) => {
           }
         )
         if (response.data.id) {
-          return navigation.navigate('CustomizingOrder', {
+          return navigation.navigate('OrderCustomizing', {
             order_id: response.data.id
           })
         }
@@ -109,7 +109,7 @@ const CreateOrder: React.FC<Props> = ({ navigation }) => {
           (item: any) => item.table === tableNumber
         )
         Toast.hide()
-        navigation.navigate('CustomizingOrder', { order_id: activeTable.id })
+        navigation.navigate('OrderCustomizing', { order_id: activeTable.id })
       }
     } catch (e) {
       Toast.show({
