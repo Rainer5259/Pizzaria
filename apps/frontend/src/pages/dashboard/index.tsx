@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import styles from './dashboard.module.scss'
+import Modal from 'react-modal'
 import { Header } from '../../components/comuns/Header'
-import { FormEvent, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { FiRefreshCcw } from 'react-icons/fi'
 import { canSSRAuth } from '@//utils/canSSR/auth'
 import { setupAPIClient } from '@//services/api'
-import Modal from 'react-modal'
 import { ModalOrder } from '@//components/ModalOrder'
 
 type OrderProps = {
@@ -78,6 +78,20 @@ export default function Dashboard({ orders }: HomeProps) {
       toast.error(e.response?.data?.error)
     }
   }
+  async function handleRemoveOrder(id: string) {
+    try {
+      const apiClient = setupAPIClient()
+      await apiClient.put('/order/remove', {
+        order_id: id
+      })
+
+      const response = await apiClient.get('/orders')
+      setOrderList(response.data)
+      setModalVisible(false)
+    } catch (e: any) {
+      toast.error(e.response?.data?.error)
+    }
+  }
 
   async function handleRefreshOrders() {
     const apiClient = setupAPIClient()
@@ -128,6 +142,7 @@ export default function Dashboard({ orders }: HomeProps) {
             onRequestClose={handleCloseModal}
             order={modalItem}
             handleFinishOrder={handleFinishItem}
+            handleRemoveOrder={handleRemoveOrder}
           />
         )}
       </div>

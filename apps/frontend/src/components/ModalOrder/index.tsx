@@ -9,12 +9,14 @@ interface ModalOrderProps {
   onRequestClose: () => void
   order: OrderItemProps[]
   handleFinishOrder: (id: string) => void
+  handleRemoveOrder: (id: string) => void
 }
 export function ModalOrder({
   isOpen,
   onRequestClose,
   order,
-  handleFinishOrder
+  handleFinishOrder,
+  handleRemoveOrder
 }: ModalOrderProps) {
   const customStyles = {
     content: {
@@ -38,28 +40,44 @@ export function ModalOrder({
       >
         <FiX size={45} color="#F34741" />
       </button>
-      <div className={styles.container}>
-        <h2>Detalhes do pedido</h2>
-        <span className={styles.table}>
-          Mesa: <strong>{order[0].order.table}</strong>
-        </span>
-        {order?.map(item => (
-          <section key={item.id} className={styles.containerItem}>
-            <span>
-              {item.amount} - <strong>{item.product.name}</strong>
-            </span>
+      {order[0] === undefined ? (
+        <>
+          <section className={styles.containerItem}>
             <span className={styles.description}>
-              {item.product.description}
+              <strong>Não tem nenhum item neste pedido</strong>
             </span>
           </section>
-        ))}
-        <button
-          className={styles.buttonOrder}
-          onClick={() => handleFinishOrder(order[0].order_id)}
-        >
-          Concluir Pedido
-        </button>
-      </div>
+          <button
+            className={styles.buttonOrder}
+            onClick={() => handleRemoveOrder(order[0].order_id)}
+          >
+            Remover pedido da lista
+          </button>
+        </>
+      ) : (
+        <div className={styles.container}>
+          <h2>Detalhes do pedido</h2>
+          <span className={styles.table}>
+            Mesa: <strong>{order[0].order.table}</strong>
+          </span>
+          {order?.map(item => (
+            <section key={item.id} className={styles.containerItem}>
+              <span>
+                {item.amount} - <strong>{item.product.name}</strong>
+              </span>
+              <span className={styles.description}>
+                {item.product.description}
+              </span>
+            </section>
+          ))}
+          <button
+            className={styles.buttonOrder}
+            onClick={() => handleFinishOrder(order[0].order_id)}
+          >
+            Concluir Pedido
+          </button>
+        </div>
+      )}
     </Modal>
   )
 }
