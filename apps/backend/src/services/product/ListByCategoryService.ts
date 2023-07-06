@@ -3,7 +3,7 @@ import * as ERROR from '../../constants/internalMessages/index.json'
 interface ProductRequest {
   category_id: string
 }
-class ListByCategoryService {
+class ListProductByCategoryIDService {
   async execute({ category_id }: ProductRequest) {
     try {
       if (!category_id) {
@@ -16,6 +16,7 @@ class ListByCategoryService {
           name: true,
           description: true,
           price: true,
+          banner: true,
           category: true
         }
       })
@@ -26,4 +27,4 @@ class ListByCategoryService {
   }
 }
 
-export { ListByCategoryService }
+export { ListProductByCategoryIDService }

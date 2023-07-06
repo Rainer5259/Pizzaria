@@ -8,7 +8,7 @@ import { CreateUserController } from '../controllers/user/CreateUserController'
 import { DetailUserController } from '../controllers/user/DetailUserController'
 import { isAuthenticated } from '../middlewares/isAuthenticated'
 import uploadConfig from '../config/multer'
-import { ListByCategoryController } from '../controllers/product/ListByCategoryController'
+import { ListProductByCategoryIDController } from '../controllers/product/ListByCategoryController'
 import { CreateOrderController } from '../controllers/order/CreateOrderController'
 import { RemoveOrderController } from '../controllers/order/RemoveOrderController'
 import { AddItemController } from '../controllers/order/AddItemService'
@@ -17,34 +17,38 @@ import { SendOrderController } from '../controllers/order/SendOrderController'
 import { ListOrdersController } from '../controllers/order/ListOrdersController'
 import { DetailOrderController } from '../controllers/order/DetailOrderController'
 import { CompleteOrderController } from '../controllers/order/CompleteOrderController'
+import { FetchImageProductController } from '../controllers/order/FetchImageProductController'
 
 const router = Router()
 
 const upload = multer(uploadConfig.upload('./tmp'))
-// -- ROUTES / USER -- //
+// -- USERS -- //
 router.post('/users', new CreateUserController().handle)
 
 router.post('/session', new AuthUserController().handle)
 
 router.get('/me', isAuthenticated, new DetailUserController().handle)
 
-// -- ROUTES / CATEGORIES -- //
+// -- CATEGORIES -- //
 
 router.post('/category', isAuthenticated, new CreateCategoryController().handle)
 
 router.get('/category', isAuthenticated, new ListCategoryController().handle)
 
-// -- ROUTES / PRODUCTS -- //
+// -- PRODUCTS -- //
+router.get(
+  '/product',
+  isAuthenticated,
+  new ListProductByCategoryIDController().handle
+)
 router.post(
   '/product',
   isAuthenticated,
   upload.single('file'),
   new CreateProductController().handle
 )
-
-router.get('/product', isAuthenticated, new ListByCategoryController().handle)
-
-// -- ROUTES / ORDERS -- //
+router.get('/image/product/:filename', new FetchImageProductController().handle)
+// -- ORDERS -- //
 
 router.post('/order', isAuthenticated, new CreateOrderController().handle)
 router.delete('/order', isAuthenticated, new RemoveOrderController().handle)
