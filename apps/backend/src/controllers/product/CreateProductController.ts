@@ -10,7 +10,9 @@ class CreateProductController {
     if (!req.file) {
       throw new Error('Error upload file')
     } else {
-      const { originalname, filename: banner } = req.file
+      const { originalname, filename: image } = req.file
+
+      const banner = `https://localhost:3333/images/product/${image}`
       const product = await createProductService.execute({
         name,
         price,
