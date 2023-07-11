@@ -60,7 +60,7 @@ export const authenticateUser =
         dispatch(setToken(token))
       }
     } catch (e) {
-      console.log('Do your login')
+      throw new Error('Faça seu login')
     }
   }
 
