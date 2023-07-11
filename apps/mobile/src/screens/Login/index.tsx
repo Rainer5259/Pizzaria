@@ -12,7 +12,6 @@ import { setToken } from '../../redux/reducers/auth'
 import { NavigationProp } from '@react-navigation/native'
 import { Toast } from 'react-native-toast-message/lib/src/Toast'
 import { RootState } from '../../redux/store'
-import SplashScreen from '../SplashScreen'
 import { colors } from '../../components/theme'
 import { api } from '../../services/api/api'
 
@@ -20,18 +19,18 @@ type RootStackParamList = {
   CreateOrder: undefined
 }
 
-type OpenTableScreenNavigationProp = NavigationProp<
+type CreateOrderScreenNavigationProp = NavigationProp<
   RootStackParamList,
   'CreateOrder'
 >
 
 type Props = {
-  navigation: OpenTableScreenNavigationProp
+  navigation: CreateOrderScreenNavigationProp
 }
 const Login: React.FC<Props> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('rc@email.com')
   const [password, setPassword] = useState<string>('')
-  const [loading, setLoading] = useState(true)
+
   const token = useSelector((state: RootState) => state.auth.token)
   const dispatch = useDispatch()
 
@@ -53,7 +52,6 @@ const Login: React.FC<Props> = ({ navigation }) => {
         email: email,
         password: password
       })
-      console.log('chegou')
       if (response.data.id) {
         storeEncryptedToken(response.data.token)
         dispatch(setToken(response.data.token))
@@ -67,7 +65,6 @@ const Login: React.FC<Props> = ({ navigation }) => {
         })
       }
     } catch (e: any) {
-      console.log(JSON.stringify(e))
       Toast.show({
         type: 'error',
         text1: `${
@@ -77,42 +74,48 @@ const Login: React.FC<Props> = ({ navigation }) => {
     }
   }
   useEffect(() => {
-    const isAuthenticated = async () => {
-      try {
+    const authenticateUserIfTokenIsValid = async () => {
+      const retrieveDecryptedToken = async (): Promise<string | null> => {
         const encryptedToken = await AsyncStorage.getItem('encryptedToken')
         if (encryptedToken) {
           const bytes = CryptoJS.AES.decrypt(encryptedToken, '@token')
           const decryptedToken = bytes.toString(CryptoJS.enc.Utf8)
-
-          const response = await api.get('/me', {
-            headers: { Authorization: `Bearer ${decryptedToken}` }
-          })
-
-          if (await response.data.id) {
-            dispatch(setToken(decryptedToken))
-            return navigation.reset({
-              index: 0,
-              routes: [{ name: 'CreateOrder' }]
-            })
-          }
-          return await AsyncStorage.removeItem('encryptedToken')
+          return decryptedToken
         }
-      } catch (e: any) {
-        if (e.response.status === 401) {
-          return
-        }
-        Toast.show({ type: 'error', text1: e.response?.data?.message })
+        return null
       }
+
+      const getInitialToken = async (): Promise<string | null> => {
+        const tokenStoraged = await retrieveDecryptedToken()
+        return tokenStoraged
+      }
+
+      token === null &&
+        getInitialToken()
+          .then(async token => {
+            const response = await api.get('/me', {
+              headers: { Authorization: `Bearer ${token}` }
+            })
+
+            if (await response.data.id) {
+              dispatch(setToken(token))
+              return navigation.reset({
+                index: 0,
+                routes: [{ name: 'CreateOrder' }]
+              })
+            }
+            return await AsyncStorage.removeItem('encryptedToken')
+          })
+          .catch(err => {
+            if (err.response.status === 401) {
+              return
+            }
+            Toast.show({ type: 'error', text1: err.response?.data?.message })
+          })
     }
-    // isAuthenticated()
+    authenticateUserIfTokenIsValid()
   }, [])
-  useEffect(() => {
-    if (token !== null || token !== undefined) {
-      setTimeout(() => {
-        setLoading(false)
-      }, 1500)
-    }
-  }, [token])
+
   return (
     <View style={styles.container}>
       <Logo />
