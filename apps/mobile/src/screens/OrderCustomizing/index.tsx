@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
@@ -83,7 +83,7 @@ const OrderCustomizing: React.FC<Props> = ({ route }) => {
       })
       setProduct(response.data)
     } catch (error) {
-      console.log('Erro ao buscar produtos por categoria:', error)
+      Toast.show({ type: 'error', text1: 'Erro ao buscar produto' })
     }
   }
 
