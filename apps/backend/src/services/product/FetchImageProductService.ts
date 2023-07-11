@@ -9,7 +9,6 @@ class FetchImageProductService {
   async execute({ filename }: FileNameProps) {
     try {
       const imagePath = path.resolve(__dirname, '../../../tmp', filename)
-      console.log('service')
 
       if (fs.existsSync(imagePath)) {
         return imagePath
