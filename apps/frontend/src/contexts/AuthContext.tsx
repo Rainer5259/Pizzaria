@@ -29,7 +29,7 @@ export function signOut() {
     destroyCookie(undefined, '@nextauth.token')
     Router.push('/')
   } catch {
-    console.log('Erro ao deslogar')
+    toast.error('Erro ao tentar deslogar')
   }
 }
 
