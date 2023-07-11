@@ -39,12 +39,7 @@ export default function Category() {
               onChange={e => setName(e.target.value)}
               value={name}
             />
-            <Button
-              type="submit"
-              className={styles.button}
-              loading={false}
-              onClick={() => console.log('Clicou')}
-            >
+            <Button type="submit" className={styles.button} loading={false}>
               Cadastrar
             </Button>
           </form>
