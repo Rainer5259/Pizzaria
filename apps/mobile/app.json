@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash/pizza.png",
+      "image": "./src/assets/images/splashScreen/pizza.png",
       "resizeMode": "contain",
       "backgroundColor": "#1D1D2E"
     },
