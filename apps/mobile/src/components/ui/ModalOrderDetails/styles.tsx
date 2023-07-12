@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 150,
-    height: 420,
+    height: 520,
     width: 300,
     paddingHorizontal: 10,
     borderRadius: 15
@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     padding: 6,
     ...fontStyles.body,
     alignSelf: 'flex-start'
-  }
+  },
+  banner: { width: '100%', aspectRatio: 1 }
 })
 export default styles
