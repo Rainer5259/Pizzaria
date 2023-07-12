@@ -34,6 +34,8 @@ const OrderCustomizing: React.FC<Props> = ({ route }) => {
   const [amount, setAmount] = useState<number>(1)
   const [selectedProduct, setSelectedProduct] = useState<string>('')
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [productDetails, setProductDetails] = useState<Product | null>(null)
+
   const token = useSelector((state: RootState) => state.auth.token)
   const { order_id } = route.params
   const navigation = useNavigation()
@@ -176,6 +178,12 @@ const OrderCustomizing: React.FC<Props> = ({ route }) => {
       })
     }
   }
+
+  const handleOpenProductDetailsModal = ({ ...item }: Product) => {
+    setProductDetails(item)
+    setOpenModal(true)
+  }
+
   useEffect(() => {
     fetchOrderByID()
     fetchCategoriesFromAPI()
@@ -198,7 +206,7 @@ const OrderCustomizing: React.FC<Props> = ({ route }) => {
     fetchProductsByCategory()
   }, [category])
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, openModal && { opacity: 0.6 }]}>
       <View style={{ flexDirection: 'row' }}>
         <Text style={[styles.title, { color: 'red' }]}>Mesa</Text>
         <Text style={[styles.title, { left: 10 }]}>{order?.table}</Text>
@@ -311,12 +319,14 @@ const OrderCustomizing: React.FC<Props> = ({ route }) => {
                 name="information-circle"
                 color="skyblue"
                 size={22}
-                style={{ alignSelf: 'center' }}
-                onPress={() => setOpenModal(true)}
+                style={{ position: 'absolute', left: 10 }}
+                onPress={() => handleOpenProductDetailsModal(item.product)}
               />
               {openModal && (
                 <ModalOrderDetails
-                  item={item?.product}
+                  key={item.id}
+                  visible={openModal}
+                  item={productDetails}
                   closeModal={setOpenModal}
                 />
               )}

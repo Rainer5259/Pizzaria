@@ -6,12 +6,17 @@ import { Product } from '../../../types/index'
 import { Modal } from 'react-native'
 
 type ModalProps = {
-  item: Product
+  item: Product | null
+  visible: boolean
   closeModal: (state: boolean) => void
 }
-const ModalOrderDetails: React.FC<ModalProps> = ({ item, closeModal }) => {
+const ModalOrderDetails: React.FC<ModalProps> = ({
+  item,
+  visible,
+  closeModal
+}) => {
   return (
-    <Modal transparent={true}>
+    <Modal transparent={true} visible={visible}>
       <View style={styles.container}>
         <ButtonIoniconsCustomizable
           useIcon={true}
@@ -22,14 +27,13 @@ const ModalOrderDetails: React.FC<ModalProps> = ({ item, closeModal }) => {
           onPress={() => closeModal(false)}
         />
         <Image
-          source={{ uri: item.banner }}
-          style={{ width: 100, height: 200 }}
-          resizeMethod="resize"
-          resizeMode="cover"
+          source={{ uri: item?.banner }}
+          style={styles.banner}
+          resizeMode="contain"
         />
-        <Text style={styles.primaryText}>{item.name}</Text>
-        <Text style={styles.primaryText}>R$ - {item.price}</Text>
-        <Text style={styles.primaryText}>{item.description}</Text>
+        <Text style={styles.primaryText}>{item?.name}</Text>
+        <Text style={styles.primaryText}>R$ - {item?.price}</Text>
+        <Text style={styles.primaryText}>{item?.description}</Text>
       </View>
     </Modal>
   )
