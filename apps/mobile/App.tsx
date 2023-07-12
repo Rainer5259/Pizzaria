@@ -1,4 +1,4 @@
-import { Provider, useDispatch } from 'react-redux'
+import { Provider } from 'react-redux'
 import { SafeAreaView, View } from 'react-native'
 import Routes from './src/routes'
 import store from './src/redux/store'
@@ -18,8 +18,8 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
         <Routes />
+        <Toast visibilityTime={5000} position="top" topOffset={55} />
       </SafeAreaView>
-      <Toast visibilityTime={5000} />
     </Provider>
   )
 }
